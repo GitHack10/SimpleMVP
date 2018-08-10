@@ -10,7 +10,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainPresenter extends MvpPresenter<MainView>{
+public class MainPresenter extends MvpPresenter<MainView> {
     private DataManager dataManager;
 
     public MainPresenter(DataManager dataManager) {
@@ -19,11 +19,11 @@ public class MainPresenter extends MvpPresenter<MainView>{
 
     public void getAllUsers() {
 
-        getView().showProgress(true);
+        if (getView() != null) getView().showProgress(true);
         dataManager.getAllUsers().enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && getView() != null) {
                     List<User> users = response.body();
                     getView().showListUsers(users);
                     getView().showProgress(false);
@@ -33,7 +33,7 @@ public class MainPresenter extends MvpPresenter<MainView>{
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                getView().showMessage("no Network!");
+                if (getView() != null) getView().showMessage("no Network!");
             }
         });
     }
