@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">SimpleMVP</string>
+    <string name="app_name">GitHubUsers</string>
+    <string name="user_info_login">Login: </string>
+    <string name="user_info_name">Name: </string>
+    <string name="user_info_location">Location: </string>
+    <string name="user_info_followers">Followers: </string>
+    <string name="user_info_following">Following: </string>
+    <string name="msg_addUser_in_favorites">User add in favorites!</string>
+    <string name="msg_removeUser_in_favorites">User deleted from favorites!</string>
+    <string name="msg_no_network">No internet connection!</string>
+    <string name="try_it_again">Try it again!</string>
 </resources>

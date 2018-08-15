@@ -1,4 +1,4 @@
-package com.example.administrator.simplemvp.mvp.main;
+package com.example.administrator.simplemvp.mvp.listusers;
 
 import com.example.administrator.simplemvp.data.global.DataManager;
 import com.example.administrator.simplemvp.data.models.User;
@@ -12,9 +12,11 @@ import retrofit2.Response;
 
 public class MainPresenter extends MvpPresenter<MainView> {
     private DataManager dataManager;
+    private MainView mainView;
 
-    public MainPresenter(DataManager dataManager) {
+    public MainPresenter(DataManager dataManager, MainView mainView) {
         this.dataManager = dataManager;
+        this.mainView = mainView;
     }
 
     public void getAllUsers() {
@@ -25,9 +27,9 @@ public class MainPresenter extends MvpPresenter<MainView> {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful() && getView() != null) {
                     List<User> users = response.body();
-                    getView().showListUsers(users);
                     getView().showProgress(false);
                     getView().showMessage("done");
+                    mainView.showUsersListFragment(users);
                 }
             }
 

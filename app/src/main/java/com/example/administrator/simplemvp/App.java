@@ -35,7 +35,7 @@ public class App extends Application {
 
         AppDatabase appDatabase = Room.databaseBuilder(this, AppDatabase.class, "database").build();
 
-        DataManager dataManager = new DataManager(githubService, appDatabase);
+        dataManager = new DataManager(githubService, appDatabase);
     }
 
     public static DataManager getDataManager() {
