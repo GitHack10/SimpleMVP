@@ -12,11 +12,9 @@ import retrofit2.Response;
 
 public class MainPresenter extends MvpPresenter<MainView> {
     private DataManager dataManager;
-    private MainView mainView;
 
-    public MainPresenter(DataManager dataManager, MainView mainView) {
+    public MainPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
-        this.mainView = mainView;
     }
 
     public void getAllUsers() {
@@ -29,7 +27,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
                     List<User> users = response.body();
                     getView().showProgress(false);
                     getView().showMessage("done");
-                    mainView.showUsersListFragment(users);
+                    getView().showUsersList(users);
                 }
             }
 
@@ -40,7 +38,15 @@ public class MainPresenter extends MvpPresenter<MainView> {
         });
     }
 
+    public List<Integer> getIdFavoritesUsers() {
+        return dataManager.getIdFavoritesUsers();
+    }
+
     public void insertUser(User user) {
         dataManager.insertUser(user);
+    }
+
+    public void itemClick(User user) {
+        if (getView() != null) getView().startInfoActivity(user);
     }
 }

@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface MainView extends MvpView {
 
-    void showUsersListFragment(List<User> users);
+    void showUsersList(List<User> users);
+
+    void startInfoActivity(User user);
 }

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.administrator.simplemvp.R;
 import com.example.administrator.simplemvp.data.models.User;
 import com.squareup.picasso.Picasso;
@@ -18,10 +20,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ItemViewHolder>  {
 
     private List<User> users;
-    private List<Integer> idAdd;
+    private List<Integer> idFavoritesUsers;
+    private OnUsersItemListener onUsersItemListener;
 
-    public UserItemAdapter(List<User> users) {
+    public UserItemAdapter(List<User> users, List<Integer> idFavoritesUsers) {
         this.users = users;
+        this.idFavoritesUsers = idFavoritesUsers;
     }
 
     @NonNull
@@ -48,6 +52,14 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ItemVi
         return users.size();
     }
 
+    public interface OnUsersItemListener {
+        void onUserItemClick(User user);
+    }
+
+    public void setOnUsersItemListener(OnUsersItemListener onUsersItemListener) {
+        this.onUsersItemListener = onUsersItemListener;
+    }
+
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private CircleImageView userCircleImageView;
@@ -60,7 +72,6 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ItemVi
             super(itemView);
             initViews(itemView);
         }
-
         private void initViews(View itemView) {
             userCircleImageView = itemView.findViewById(R.id.ImageView_itemUser_icon);
             addUserImageView = itemView.findViewById(R.id.ImageView_itemUser_addUser);
@@ -75,34 +86,34 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ItemVi
             userNameTextView.setText(userData.getLogin());
             userIdTextView.setText(String.valueOf(userData.getId()));
 
-//            for (int i : idAdd) {
-//                if (i == userData.getId()) {
-//                    addUserImageView.setImageResource(R.drawable.ic_check_user);
-//                    break;
-//                } else {
-//                    addUserImageView.setImageResource(R.drawable.ic_add_user);
-//                }
-//            }
 
-//            addUserImageView.setOnClickListener(view -> {
-//                new AddUser(userData).execute();
-//                idFavoritesUsers.add(userData.getId());
-//
-//                for (int i : idFavoritesUsers) {
-//                    if (i == userData.getId()) {
-//                        addUserImageView.setImageResource(R.drawable.ic_check_user);
-//                        break;
-//                    } else {
-//                        addUserImageView.setImageResource(R.drawable.ic_add_user);
-//                    }
-//                }
-//                Toast.makeText(itemView.getContext(), itemView.getContext().getResources()
-//                        .getString(R.string.msg_addUser_in_favorites), Toast.LENGTH_SHORT).show();
-//            });
-//
-//            itemView.setOnClickListener(view -> {
-//                if (onUsersItemListener != null) onUsersItemListener.onUserItemClick(userData);
-//            });
+            for (int i : idFavoritesUsers) {
+                if (i == userData.getId()) {
+                    addUserImageView.setImageResource(R.drawable.ic_check_user);
+                    break;
+                } else {
+                    addUserImageView.setImageResource(R.drawable.ic_add_user);
+                }
+            }
+
+            addUserImageView.setOnClickListener(view -> {
+                idFavoritesUsers.add(userData.getId());
+
+                for (int i : idFavoritesUsers) {
+                    if (i == userData.getId()) {
+                        addUserImageView.setImageResource(R.drawable.ic_check_user);
+                        break;
+                    } else {
+                        addUserImageView.setImageResource(R.drawable.ic_add_user);
+                    }
+                }
+                Toast.makeText(itemView.getContext(), itemView.getContext().getResources()
+                        .getString(R.string.msg_addUser_in_favorites), Toast.LENGTH_SHORT).show();
+            });
+
+            itemView.setOnClickListener(view -> {
+                if (onUsersItemListener != null) onUsersItemListener.onUserItemClick(userData);
+            });
         }
     }
 }

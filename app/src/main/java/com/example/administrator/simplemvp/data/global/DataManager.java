@@ -2,10 +2,13 @@ package com.example.administrator.simplemvp.data.global;
 
 import android.os.AsyncTask;
 
+import com.example.administrator.simplemvp.App;
 import com.example.administrator.simplemvp.data.database.AppDatabase;
 import com.example.administrator.simplemvp.data.models.User;
 import com.example.administrator.simplemvp.data.networks.GithubService;
+import com.example.administrator.simplemvp.ui.listusers.UserItemAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -15,6 +18,8 @@ public class DataManager {
 
     private GithubService githubService;
     private AppDatabase appDatabase;
+    private List<Integer> idFavoritesUsers = new ArrayList<>();
+
 
     public DataManager(GithubService githubService, AppDatabase appDatabase) {
         this.githubService = githubService;
@@ -38,6 +43,11 @@ public class DataManager {
         }
     }
 
+    public List<Integer> getIdFavoritesUsers() {
+        new GetIdFavoritesUsers().execute();
+        return idFavoritesUsers;
+    }
+
     public void insertUser(User user) {
         new InsertUser(user).execute();
     }
@@ -46,11 +56,28 @@ public class DataManager {
         new DeleteUser(user).execute();
     }
 
-    class GetUsers extends AsyncTask<Void,Void,List<User>>{
+    class GetUsers extends AsyncTask<Void, Void, List<User>>{
 
         @Override
         protected List<User> doInBackground(Void... voids) {
             return appDatabase.userDao().getUsers();
+        }
+    }
+
+    class GetIdFavoritesUsers extends AsyncTask<Void, Void, List<Integer>> {
+
+        @Override
+        protected List<Integer> doInBackground(Void... voids) {
+            List<User> favoritesUsers = App.getDataManager().getUsers();
+            List<Integer> idFavoriteUser = new ArrayList<>();
+
+            for (User favoriteUser : favoritesUsers) idFavoriteUser.add(favoriteUser.getId());
+            return idFavoriteUser;
+        }
+
+        @Override
+        protected void onPostExecute(List<Integer> integers) {
+            idFavoritesUsers = integers;
         }
     }
 
