@@ -77,10 +77,13 @@ public class UsersListFragment extends Fragment implements MainView {
     }
 
     @Override
-    public void showUsersList(List<User> users) {
-        userItemAdapter = new UserItemAdapter(users, presenter.getIdFavoritesUsers());
+    public void showUsersList(List<User> users, List<Integer> idFavoritesUsers) {
+        userItemAdapter = new UserItemAdapter(users, idFavoritesUsers);
         userItemAdapter.setOnUsersItemListener(user -> {
             presenter.itemClick(user);
+        });
+        userItemAdapter.setAddUserIconClickListener(user -> {
+            presenter.insertUser(user);
         });
         userRecyclerView.setAdapter(userItemAdapter);
     }

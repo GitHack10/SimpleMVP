@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.simplemvp.App;
 import com.example.administrator.simplemvp.R;
 import com.example.administrator.simplemvp.data.models.User;
 import com.squareup.picasso.Picasso;
@@ -21,7 +22,9 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ItemVi
 
     private List<User> users;
     private List<Integer> idFavoritesUsers;
+
     private OnUsersItemListener onUsersItemListener;
+    private AddUserIconClickListener addUserIconClickListener;
 
     public UserItemAdapter(List<User> users, List<Integer> idFavoritesUsers) {
         this.users = users;
@@ -52,8 +55,16 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ItemVi
         return users.size();
     }
 
+    public void setAddUserIconClickListener(AddUserIconClickListener addUserIconClickListener) {
+        this.addUserIconClickListener = addUserIconClickListener;
+    }
+
     public interface OnUsersItemListener {
         void onUserItemClick(User user);
+    }
+
+    public interface AddUserIconClickListener {
+        void addIconClick(User user);
     }
 
     public void setOnUsersItemListener(OnUsersItemListener onUsersItemListener) {
@@ -97,8 +108,9 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ItemVi
             }
 
             addUserImageView.setOnClickListener(view -> {
-                idFavoritesUsers.add(userData.getId());
+                if (addUserIconClickListener != null) addUserIconClickListener.addIconClick(userData);
 
+                idFavoritesUsers.add(userData.getId());
                 for (int i : idFavoritesUsers) {
                     if (i == userData.getId()) {
                         addUserImageView.setImageResource(R.drawable.ic_check_user);

@@ -6,7 +6,6 @@ import com.example.administrator.simplemvp.App;
 import com.example.administrator.simplemvp.data.database.AppDatabase;
 import com.example.administrator.simplemvp.data.models.User;
 import com.example.administrator.simplemvp.data.networks.GithubService;
-import com.example.administrator.simplemvp.ui.listusers.UserItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +17,6 @@ public class DataManager {
 
     private GithubService githubService;
     private AppDatabase appDatabase;
-    private List<Integer> idFavoritesUsers = new ArrayList<>();
-
 
     public DataManager(GithubService githubService, AppDatabase appDatabase) {
         this.githubService = githubService;
@@ -44,8 +41,15 @@ public class DataManager {
     }
 
     public List<Integer> getIdFavoritesUsers() {
-        new GetIdFavoritesUsers().execute();
-        return idFavoritesUsers;
+        try {
+            return new GetIdFavoritesUsers().execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void insertUser(User user) {
@@ -68,30 +72,26 @@ public class DataManager {
 
         @Override
         protected List<Integer> doInBackground(Void... voids) {
-            List<User> favoritesUsers = App.getDataManager().getUsers();
+            List<User> favoritesUsers = appDatabase.userDao().getUsers();
             List<Integer> idFavoriteUser = new ArrayList<>();
 
             for (User favoriteUser : favoritesUsers) idFavoriteUser.add(favoriteUser.getId());
+            List<Integer> i = idFavoriteUser;
             return idFavoriteUser;
-        }
-
-        @Override
-        protected void onPostExecute(List<Integer> integers) {
-            idFavoritesUsers = integers;
         }
     }
 
     class InsertUser extends AsyncTask<Void, Void, Void> {
 
-        private User user;
+        private User favoriteUser;
 
-        InsertUser(User user) {
-            this.user = user;
+        InsertUser(User favoriteUser) {
+            this.favoriteUser = favoriteUser;
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            appDatabase.userDao().insert(user);
+            appDatabase.userDao().insert(favoriteUser);
             return null;
         }
     }

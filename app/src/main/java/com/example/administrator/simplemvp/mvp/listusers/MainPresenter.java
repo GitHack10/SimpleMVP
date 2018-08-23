@@ -25,9 +25,10 @@ public class MainPresenter extends MvpPresenter<MainView> {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful() && getView() != null) {
                     List<User> users = response.body();
+                    List<Integer> idFavoritesUsers = getIdFavoritesUsers();
                     getView().showProgress(false);
                     getView().showMessage("done");
-                    getView().showUsersList(users);
+                    getView().showUsersList(users, idFavoritesUsers);
                 }
             }
 
