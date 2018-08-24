@@ -55,6 +55,10 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ItemVi
         return users.size();
     }
 
+    public void setIdFavoritesUsers(List<Integer> idFavoritesUsers) {
+        this.idFavoritesUsers = idFavoritesUsers;
+    }
+
     public void setAddUserIconClickListener(AddUserIconClickListener addUserIconClickListener) {
         this.addUserIconClickListener = addUserIconClickListener;
     }

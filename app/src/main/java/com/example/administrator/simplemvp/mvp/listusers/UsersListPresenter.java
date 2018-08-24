@@ -10,10 +10,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainPresenter extends MvpPresenter<MainView> {
+public class UsersListPresenter extends MvpPresenter<UsersListView> {
     private DataManager dataManager;
 
-    public MainPresenter(DataManager dataManager) {
+    public UsersListPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
@@ -39,9 +39,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
         });
     }
 
-    public List<Integer> getIdFavoritesUsers() {
-        return dataManager.getIdFavoritesUsers();
-    }
+    public List<Integer> getIdFavoritesUsers() { return dataManager.getIdFavoritesUsers(); }
 
     public void insertUser(User user) {
         dataManager.insertUser(user);

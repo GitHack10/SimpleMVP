@@ -2,7 +2,6 @@ package com.example.administrator.simplemvp.data.global;
 
 import android.os.AsyncTask;
 
-import com.example.administrator.simplemvp.App;
 import com.example.administrator.simplemvp.data.database.AppDatabase;
 import com.example.administrator.simplemvp.data.models.User;
 import com.example.administrator.simplemvp.data.networks.GithubService;
@@ -43,10 +42,7 @@ public class DataManager {
     public List<Integer> getIdFavoritesUsers() {
         try {
             return new GetIdFavoritesUsers().execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
             return null;
         }
@@ -76,7 +72,6 @@ public class DataManager {
             List<Integer> idFavoriteUser = new ArrayList<>();
 
             for (User favoriteUser : favoritesUsers) idFavoriteUser.add(favoriteUser.getId());
-            List<Integer> i = idFavoriteUser;
             return idFavoriteUser;
         }
     }

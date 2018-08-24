@@ -5,7 +5,7 @@ import com.example.administrator.simplemvp.mvp.global.MvpView;
 
 import java.util.List;
 
-public interface MainView extends MvpView {
+public interface UsersListView extends MvpView {
 
     void showUsersList(List<User> users, List<Integer> idFavoritesUsers);
 

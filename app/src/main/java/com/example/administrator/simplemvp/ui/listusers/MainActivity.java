@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.administrator.simplemvp.R;
+import com.example.administrator.simplemvp.ui.favoritesusers.FavoritesUsersActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,5 +40,22 @@ public class MainActivity extends AppCompatActivity {
             usersSaveFragment = new UsersSaveFragment();
             getSupportFragmentManager().beginTransaction().add(usersSaveFragment, TAG2).commit();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_main_favoritesUsers:
+                getSupportFragmentManager().findFragmentByTag(TAG).startActivityForResult(FavoritesUsersActivity
+                        .getStartIntent(MainActivity.this), REQUEST_CODE_FAVORITES);
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
     }
 }
