@@ -13,14 +13,13 @@ import com.example.administrator.simplemvp.data.models.User;
 public class InfoUserActivity extends AppCompatActivity {
 
     private final static String EXTRA_USER = "INFO_USER";
+    private User user;
 
     public static Intent getStartIntent(Context context, User user) {
         Intent intent = new Intent(context, InfoUserActivity.class);
         intent.putExtra(EXTRA_USER, user);
         return intent;
     }
-
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

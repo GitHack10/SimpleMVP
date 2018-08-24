@@ -54,14 +54,7 @@ public class UsersListFragment extends Fragment implements UsersListView {
         userRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         presenter = new UsersListPresenter(App.getDataManager());
         presenter.attachView(this);
-        if (savedInstanceState == null) {
-            presenter.getAllUsers();
-        }
-        else {
-            UsersSaveFragment usersSaveFragment = (UsersSaveFragment) getActivity().getSupportFragmentManager().findFragmentByTag(MainActivity.TAG2);
-            userItemAdapter = usersSaveFragment.getUserItemAdapter();
-            userRecyclerView.setAdapter(userItemAdapter);
-        }
+        presenter.getAllUsers();
     }
 
     @Override
@@ -72,14 +65,6 @@ public class UsersListFragment extends Fragment implements UsersListView {
     @Override
     public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("abc", "cba");
-        ((UsersSaveFragment) getActivity().getSupportFragmentManager()
-                .findFragmentByTag(MainActivity.TAG2)).setUserItemAdapter(userItemAdapter);
     }
 
     @Override

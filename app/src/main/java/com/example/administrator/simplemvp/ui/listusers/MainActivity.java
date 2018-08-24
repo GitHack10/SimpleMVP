@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_FAVORITES = 2;
 
     UsersListFragment usersListFragment;
-    UsersSaveFragment usersSaveFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +27,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         usersListFragment = (UsersListFragment) getSupportFragmentManager().findFragmentByTag(TAG);
-        usersSaveFragment = (UsersSaveFragment) getSupportFragmentManager().findFragmentByTag(TAG2);
 
         if (usersListFragment == null) {
             usersListFragment = new UsersListFragment();
             getSupportFragmentManager().beginTransaction().
                     add(R.id.FrameLayout_main_container, usersListFragment, TAG).commit();
-        }
-
-        if (usersSaveFragment == null) {
-            usersSaveFragment = new UsersSaveFragment();
-            getSupportFragmentManager().beginTransaction().add(usersSaveFragment, TAG2).commit();
         }
     }
 

@@ -10,22 +10,21 @@ import retrofit2.Response;
 
 public class InfoUserPresenter extends MvpPresenter<InfoUserView> {
     private DataManager dataManager;
-    private InfoUserView view;
-    private User user;
 
-    public InfoUserPresenter(DataManager dataManager, InfoUserView view) {
+    public InfoUserPresenter(DataManager dataManager) {
         this.dataManager = dataManager;
-        this.view = view;
     }
 
-    public void getUser() {
+    public void getUser(String login) {
+
         if (getView() != null) getView().showProgress(true);
-        dataManager.getUser(user.getLogin()).enqueue(new Callback<User>() {
+        dataManager.getUser(login).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    user = response.body();
-
+                    User user = response.body();
+                    getView().showProgress(false);
+                    getView().showInfoUser(user);
                 }
             }
 

@@ -4,7 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.InfoUserFragment">
+    tools:context=".ui.infousers.InfoUserActivity">
+
+    <ProgressBar
+        android:id="@+id/progress_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="60dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,10 +33,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/TextView_user_info_defaultLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Логин : "
                 android:textColor="@android:color/black"
+                android:visibility="gone"
                 android:textSize="16sp" />
 
             <TextView
@@ -48,10 +57,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/TextView_user_info_defaultName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Имя : "
                 android:textColor="@android:color/black"
+                android:visibility="gone"
                 android:textSize="16sp" />
 
             <TextView
@@ -70,10 +81,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/TextView_user_info_defaultLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Место Нахождения : "
                 android:textColor="@android:color/black"
+                android:visibility="gone"
                 android:textSize="16sp" />
 
             <TextView
@@ -92,10 +105,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/TextView_user_info_public_defaultRepos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Публичные репозитоии : "
                 android:textColor="@android:color/black"
+                android:visibility="gone"
                 android:textSize="16sp" />
 
             <TextView
@@ -114,10 +129,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/TextView_user_info_defaultFollowers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Наблюдатели : "
                 android:textColor="@android:color/black"
+                android:visibility="gone"
                 android:textSize="16sp" />
 
             <TextView
@@ -136,10 +153,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/TextView_user_info_defaultFollowing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Наблюдаемые : "
                 android:textColor="@android:color/black"
+                android:visibility="gone"
                 android:textSize="16sp" />
 
             <TextView
