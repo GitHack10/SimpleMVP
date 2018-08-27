@@ -27,7 +27,7 @@ public class InfoUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info_user);
 
         user = getIntent().getParcelableExtra(EXTRA_USER);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar_main));
+        setSupportActionBar(findViewById(R.id.toolbar_main));
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);

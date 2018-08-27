@@ -1,6 +1,5 @@
 package com.example.administrator.simplemvp.mvp.favoritesusers;
 
-import com.example.administrator.simplemvp.App;
 import com.example.administrator.simplemvp.data.global.DataManager;
 import com.example.administrator.simplemvp.data.models.User;
 import com.example.administrator.simplemvp.mvp.global.MvpPresenter;

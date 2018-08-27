@@ -12,7 +12,6 @@ import com.example.administrator.simplemvp.ui.favoritesusers.FavoritesUsersActiv
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "tag";
-    public static final String TAG2 = "tag2";
     public static final int REQUEST_CODE_FAVORITES = 2;
 
     UsersListFragment usersListFragment;

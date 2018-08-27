@@ -36,7 +36,6 @@ public class UsersListFragment extends Fragment implements UsersListView {
     private ProgressBar progressBar;
     private Call<List<User>> usersCall;
 
-    private final static String EXTRA_USER = "INFO_USER";
     private static final int REQUEST_CODE_USER_INFO = 1;
 
     @Override
