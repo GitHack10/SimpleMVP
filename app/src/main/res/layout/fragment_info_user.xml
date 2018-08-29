@@ -84,7 +84,7 @@
                 android:id="@+id/TextView_user_info_defaultLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Место Нахождения : "
+                android:text="Место нахождения : "
                 android:textColor="@android:color/black"
                 android:visibility="gone"
                 android:textSize="16sp" />

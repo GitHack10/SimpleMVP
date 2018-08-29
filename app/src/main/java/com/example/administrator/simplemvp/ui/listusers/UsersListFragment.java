@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -48,9 +49,11 @@ public class UsersListFragment extends Fragment implements UsersListView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressBar = view.findViewById(R.id.progress_main);
         userRecyclerView = view.findViewById(R.id.RecyclerView_main_user);
         userRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(userRecyclerView.getContext(),((LinearLayoutManager)userRecyclerView.getLayoutManager()).getOrientation());
+        userRecyclerView.addItemDecoration(dividerItemDecoration);
+        progressBar = view.findViewById(R.id.progress_main);
         presenter = new UsersListPresenter(App.getDataManager());
         presenter.attachView(this);
         presenter.getAllUsers();
